@@ -14,14 +14,14 @@ public class Project implements Serializable {
     private int id;
 
     @Column(name = "name")
-    private String namee;
+    private String name;
 
     @Column(name = "description")
     private String description;
 
-    @Column(name = "status")
-    @OneToMany
-    private ProjectStatus status;
+    //@Column(name = "status")
+    //@OneToMany
+    //private ProjectStatus status;
 
     @Column(name = "created_date")
     private LocalDateTime createdDate;
