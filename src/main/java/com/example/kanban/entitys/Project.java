@@ -14,7 +14,7 @@ public class Project implements Serializable {
     private int id;
 
     @Column(name = "name")
-    private String name;
+    private String namee;
 
     @Column(name = "description")
     private String description;
