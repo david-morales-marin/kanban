@@ -1,21 +1,20 @@
 package com.example.kanban.entitys;
 
 import jakarta.persistence.*;
-
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Entity
-@Table(name = "Project")
-public class Project implements Serializable {
+@Table(name = "Task")
+public class Task implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
-    private List<Task> tasks;
+    @ManyToOne
+    @JoinColumn(name = "project_id")
+    private Project project;
 
     @Column(name = "name")
     private String name;
@@ -24,8 +23,15 @@ public class Project implements Serializable {
     private String description;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "project_Status")
-    private ProjectStatus projectStatus;
+    @Column(name = "task_Status")
+    private TaskStatus taskStatus;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "task_Type")
+    private TaskType taskType;
+
+    @Column(name = "due_date")
+    private LocalDateTime dueDate;
 
     @Column(name = "created_date")
     private LocalDateTime createdDate;
