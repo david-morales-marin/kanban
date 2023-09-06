@@ -9,8 +9,9 @@ import java.time.LocalDateTime;
 public class Task implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
 
     @ManyToOne
     @JoinColumn(name = "project_id")
