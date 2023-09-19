@@ -1,4 +1,12 @@
 package com.example.kanban.repositorys;
 
-public class ProjectRepository {
+import com.example.kanban.entitys.Project;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+
+@Repository
+public interface ProjectRepository extends JpaRepository<Project, Long> {
+
 }
