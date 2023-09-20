@@ -31,7 +31,11 @@ public class ProjectServices {
 
     public void deleteProject(Long id){
         this.projectRepository.deleteById(id);
+<<<<<<< HEAD
       //  return "Se elimino el projecto correctamente";
+=======
+        //  return "Se elimino el projecto correctamente";
+>>>>>>> 895a38e3c167974fdde127385b0327389fe05604
     }
 
     public Project putProject(Project project, Long id){
