@@ -40,6 +40,16 @@ public class ProjectController {
         return this.projectServices.createProject(project);
     }
 
+    @PostMapping("/pruebaPost")
+    public ResponseEntity<String> createProject1(@RequestBody Project project) {
+
+        if (project.getName().isEmpty() ){
+            return new ResponseEntity<>("El nombre del projecto es obligatorio", HttpStatus.BAD_REQUEST);
+        }
+
+        return new ResponseEntity<>("Proyecto creado con éxito", HttpStatus.CREATED);
+    }
+    
     @PutMapping("/{id}")
     public Project putProject(@RequestBody Project project){
         return this.projectServices.putProject(project, project.getId());
@@ -47,11 +57,9 @@ public class ProjectController {
 
     @DeleteMapping("/{id}")
     public void deleteProject(@PathVariable("id") Long id){
-<<<<<<< HEAD
+
          this.projectServices.deleteProject(id);
-=======
-        this.projectServices.deleteProject(id);
->>>>>>> 895a38e3c167974fdde127385b0327389fe05604
+
     }
 
 }
