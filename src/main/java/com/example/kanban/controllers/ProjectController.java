@@ -3,11 +3,14 @@ package com.example.kanban.controllers;
 import com.example.kanban.entitys.Project;
 import com.example.kanban.services.ProjectServices;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 /*
 POST -> /v1/projects // crear un Project
@@ -31,13 +34,23 @@ public class ProjectController {
     }
 
     @GetMapping("/{id}")
-    public Optional<Project> getProjectById(@PathVariable("id") Long id){
+    public Optional<Project> getProjectById(@PathVariable("id") UUID id){
         return this.projectServices.getProject(id);
     }
 
     @PostMapping()
-    public Project creatreProject(@RequestBody Project project){
+    public Project createProject(@RequestBody Project project){
         return this.projectServices.createProject(project);
+    }
+
+    @PostMapping("/pruebaPost")
+    public ResponseEntity<String> createProject1(@RequestBody Project project) {
+
+        if (project.getName().isEmpty() ){
+            return new ResponseEntity<>("El nombre del projecto es obligatorio", HttpStatus.BAD_REQUEST);
+        }
+
+        return new ResponseEntity<>("Proyecto creado con éxito", HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
@@ -46,12 +59,10 @@ public class ProjectController {
     }
 
     @DeleteMapping("/{id}")
-    public void deleteProject(@PathVariable("id") Long id){
-<<<<<<< HEAD
+    public void deleteProject(@PathVariable("id") UUID id){
+
          this.projectServices.deleteProject(id);
-=======
-        this.projectServices.deleteProject(id);
->>>>>>> 895a38e3c167974fdde127385b0327389fe05604
+
     }
 
 }

@@ -4,14 +4,9 @@ import com.example.kanban.entitys.Project;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-<<<<<<< HEAD
-import java.util.List;
+import java.util.UUID;
 
 @Repository
-public interface ProjectRepository extends JpaRepository<Project, Long> {
+public interface ProjectRepository extends JpaRepository<Project, UUID> {
 
-=======
-@Repository
-public interface ProjectRepository extends JpaRepository<Project, Long> {
->>>>>>> 895a38e3c167974fdde127385b0327389fe05604
 }

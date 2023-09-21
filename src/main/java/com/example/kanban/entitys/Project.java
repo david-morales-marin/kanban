@@ -1,23 +1,32 @@
 package com.example.kanban.entitys;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
+import org.hibernate.annotations.GenericGenerator;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
+
 
 @Entity
 @Table(name = "Project")
+//@JsonIgnoreProperties(ignoreUnknown = true)
 public class Project implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+   /* @GenericGenerator(
+            name = "UUID",
+            strategy = "org.hibernate.id.UUIDGenerator"
+    )*/
+    private UUID id;
 
     @OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
     private List<Task> tasks;
 
-    @Column(name = "name")
+    @Column(name = "name" , nullable = false)
     private String name;
 
     @Column(name = "description")
@@ -35,21 +44,21 @@ public class Project implements Serializable {
 
     public Project(){}
 
-    public Project(Long id, List<Task> tasks, String name, String description, ProjectStatus projectStatus, LocalDateTime createdDate, LocalDateTime lastUpdatedDate) {
+    public Project(UUID id, List<Task> tasks, String name, String description, ProjectStatus projectStatus, LocalDateTime createdDate, LocalDateTime lastUpdatedDate) {
         this.id = id;
         this.tasks = tasks;
         this.name = name;
         this.description = description;
-        this.projectStatus = projectStatus;
+        this.projectStatus = ProjectStatus.ACTIVE;
         this.createdDate = createdDate;
         this.lastUpdatedDate = lastUpdatedDate;
     }
 
-    public Long getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 
