@@ -52,14 +52,22 @@ public class ProjectController {
 
         return new ResponseEntity<>("Proyecto creado con éxito", HttpStatus.CREATED);
     }
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> 8576c2a0f4ad4b7a2eeca8c29641a5e487afb463
     @PutMapping("/{id}")
     public Project putProject(@RequestBody Project project){
         return this.projectServices.putProject(project, project.getId());
     }
 
     @DeleteMapping("/{id}")
+<<<<<<< HEAD
     public void deleteProject(@PathVariable("id") UUID id){
+=======
+    public void deleteProject(@PathVariable("id") Long id){
+>>>>>>> 8576c2a0f4ad4b7a2eeca8c29641a5e487afb463
 
          this.projectServices.deleteProject(id);
 
