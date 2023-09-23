@@ -1,7 +1,9 @@
 package com.example.kanban.services;
 
 import com.example.kanban.entitys.Project;
+import com.example.kanban.entitys.Task;
 import com.example.kanban.repositorys.ProjectRepository;
+import com.example.kanban.repositorys.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -17,6 +19,9 @@ public class ProjectServices {
 
     @Autowired
     private ProjectRepository projectRepository;
+
+    @Autowired
+    private TaskRepository taskRepository;
 
     public ProjectServices (ProjectRepository projectRepository){
         this.projectRepository = projectRepository;
@@ -39,7 +44,7 @@ public class ProjectServices {
 
     public void deleteProject(UUID id){
         this.projectRepository.deleteById(id);
-      //  return "Se elimino el projecto correctamente";
+      // return "Se elimino el projecto correctamente";
     }
 
     public Project putProject(Project project, UUID id){
@@ -49,6 +54,14 @@ public class ProjectServices {
 
         return this.projectRepository.save(project1);
 
+    }
+
+    public Task createTask( Task task ){
+        return this.taskRepository.save(task);
+    }
+
+    public Project finById(UUID id){
+        return this.projectRepository.findById(id).orElse(null);
     }
 
 }

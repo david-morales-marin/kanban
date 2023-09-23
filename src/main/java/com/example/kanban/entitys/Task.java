@@ -13,10 +13,6 @@ public class Task implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-   /* @GenericGenerator(
-            name = "UUID",
-            strategy = "org.hibernate.id.UUIDGenerator"
-    )*/
     private UUID id;
 
 
