@@ -1,8 +1,11 @@
 package com.example.kanban.controllers;
 
+import com.example.kanban.entitys.Pagination;
 import com.example.kanban.entitys.Project;
 import com.example.kanban.services.ProjectServices;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -28,9 +31,18 @@ public class ProjectController {
         this.projectServices = projectServices;
     }
 
-    @GetMapping()
+    @GetMapping("/list")
     public List<Project> getProjects(){
         return this.projectServices.getListaProject();
+    }
+
+    @GetMapping("/pageable")
+    public ResponseEntity<Page<Project>> getAllProjects(
+            @RequestParam(defaultValue = "0")
+            int page, @RequestParam(defaultValue = "10") int size) {
+        PageRequest pageRequest = PageRequest.of(page, size);
+        Page<Project> projects = projectServices.getAllProjects(pageRequest);
+        return ResponseEntity.ok(projects);
     }
 
     @GetMapping("/{id}")
@@ -52,25 +64,15 @@ public class ProjectController {
 
         return new ResponseEntity<>("Proyecto creado con éxito", HttpStatus.CREATED);
     }
-<<<<<<< HEAD
 
-=======
-    
->>>>>>> 8576c2a0f4ad4b7a2eeca8c29641a5e487afb463
     @PutMapping("/{id}")
     public Project putProject(@RequestBody Project project){
         return this.projectServices.putProject(project, project.getId());
     }
 
     @DeleteMapping("/{id}")
-<<<<<<< HEAD
     public void deleteProject(@PathVariable("id") UUID id){
-=======
-    public void deleteProject(@PathVariable("id") Long id){
->>>>>>> 8576c2a0f4ad4b7a2eeca8c29641a5e487afb463
-
          this.projectServices.deleteProject(id);
-
     }
 
 }

@@ -132,8 +132,8 @@ public class Task implements Serializable {
     public void setLastUpdatedDate(LocalDateTime lastUpdatedDate) {
         this.lastUpdatedDate = lastUpdatedDate;
     }
-<<<<<<< HEAD
+
 }
-=======
-}
->>>>>>> 8576c2a0f4ad4b7a2eeca8c29641a5e487afb463
+
+
+

@@ -3,6 +3,9 @@ package com.example.kanban.services;
 import com.example.kanban.entitys.Project;
 import com.example.kanban.repositorys.ProjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,6 +23,10 @@ public class ProjectServices {
     }
     public List<Project> getListaProject(){
         return this.projectRepository.findAll();
+    }
+
+    public Page<Project> getAllProjects(Pageable pageable){
+        return projectRepository.findAll(pageable);
     }
 
     public Optional<Project> getProject(UUID id){

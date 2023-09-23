@@ -17,10 +17,6 @@ public class Project implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-   /* @GenericGenerator(
-            name = "UUID",
-            strategy = "org.hibernate.id.UUIDGenerator"
-    )*/
     private UUID id;
 
     @OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
@@ -44,7 +40,7 @@ public class Project implements Serializable {
 
     public Project(){}
 
-    public Project(UUID id, List<Task> tasks, String name, String description, ProjectStatus projectStatus, LocalDateTime createdDate, LocalDateTime lastUpdatedDate) {
+    public Project(UUID id, List<Task> tasks, String name, String description, ProjectStatus ProjectStatus , LocalDateTime createdDate, LocalDateTime lastUpdatedDate) {
         this.id = id;
         this.tasks = tasks;
         this.name = name;
