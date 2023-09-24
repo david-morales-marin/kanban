@@ -1,11 +1,13 @@
 package com.example.kanban.entitys;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -20,7 +22,8 @@ public class Project implements Serializable {
     private UUID id;
 
     @OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
-    private List<Task> tasks;
+    @JsonIgnore
+    private List<Task> tasks;// = new ArrayList<>();
 
     @Column(name = "name" , nullable = false)
     private String name;
@@ -33,10 +36,10 @@ public class Project implements Serializable {
     private ProjectStatus projectStatus;
 
     @Column(name = "created_date")
-    private LocalDateTime createdDate;
+    private LocalDateTime createdDate = LocalDateTime.now();
 
     @Column(name = "last_updated_date")
-    private LocalDateTime lastUpdatedDate;
+    private LocalDateTime lastUpdatedDate = LocalDateTime.now();
 
     public Project(){}
 

@@ -39,6 +39,7 @@ public class ProjectServices {
     }
 
     public Project createProject(Project nuevoProject){
+
         return this.projectRepository.save(nuevoProject);
     }
 
@@ -56,12 +57,9 @@ public class ProjectServices {
 
     }
 
-    public Task createTask( Task task ){
-        return this.taskRepository.save(task);
-    }
-
     public Project finById(UUID id){
         return this.projectRepository.findById(id).orElse(null);
     }
+
 
 }

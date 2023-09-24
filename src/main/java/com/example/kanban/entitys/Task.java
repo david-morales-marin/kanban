@@ -1,5 +1,6 @@
 package com.example.kanban.entitys;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -35,13 +36,13 @@ public class Task implements Serializable {
     private TaskType taskType;
 
     @Column(name = "due_date")
-    private LocalDateTime dueDate;
+    private LocalDateTime dueDate = LocalDateTime.now();
 
     @Column(name = "created_date")
-    private LocalDateTime createdDate;
+    private LocalDateTime createdDate = LocalDateTime.now();
 
     @Column(name = "last_updated_date")
-    private LocalDateTime lastUpdatedDate;
+    private LocalDateTime lastUpdatedDate = LocalDateTime.now();
 
     public Task(){}
 
