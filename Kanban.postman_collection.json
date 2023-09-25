@@ -178,7 +178,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:8090/v1/projects/b0efd4e6-1f2c-4dcf-bd7b-1104348fab94/tareas",
+					"raw": "localhost:8090/v1/projects/b0efd4e6-1f2c-4dcf-bd7b-1104348fab94",
 					"host": [
 						"localhost"
 					],
@@ -186,8 +186,7 @@
 					"path": [
 						"v1",
 						"projects",
-						"b0efd4e6-1f2c-4dcf-bd7b-1104348fab94",
-						"tareas"
+						"b0efd4e6-1f2c-4dcf-bd7b-1104348fab94"
 					]
 				}
 			},
@@ -215,8 +214,7 @@
 					"port": "8090",
 					"path": [
 						"v1",
-						"c89fab5d-0fb7-4acf-8060-d3e569c75490",
-						"prueba1"
+						"c89fab5d-0fb7-4acf-8060-d3e569c75490"
 					]
 				}
 			},
