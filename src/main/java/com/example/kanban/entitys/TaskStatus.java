@@ -1,5 +1,6 @@
 package com.example.kanban.entitys;
 
+
 public enum TaskStatus {
     TODO,
     INPROGRESS,
@@ -20,4 +21,5 @@ public enum TaskStatus {
                 return false;
         }
     }
+
 }

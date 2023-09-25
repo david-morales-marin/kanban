@@ -40,6 +40,10 @@ public class TaskServices {
         return this.taskRepository.findAll();
     }
 
+    public Task saveTaskUpdateStatus(Task task){
+        return this.taskRepository.save(task);
+    }
+
     public Task createTaskk(UUID project_id, Task task) throws ChangeSetPersister.NotFoundException {
 
        Project project =  projectRepository.findById(project_id)
@@ -49,58 +53,21 @@ public class TaskServices {
         return taskRepository.save(task);
     }
 
-  /*  public Task updateTaskStatus(UUID taskId, TaskStatus status) {
-        Task task =  taskRepository.findById(taskId).orElse(null); //findTaskById(taskId);
-
-        if (task != null) {
-            task.setTaskStatus(status);  //setStatus(newStatus);
-        }
-        return task;
-    }*/
-
-   /* public Task updateTaskStatus(UUID taskId, TaskStatus newStatus) {
-        Task taskToUpdate =  taskRepository.findById(taskId).orElse(null);
-        if (taskToUpdate != null) {
-            TaskStatus currentStatus = taskToUpdate.getTaskStatus();// getStatus();
-            if (isValidStatus(currentStatus, newStatus)) {
-                taskToUpdate.setTaskStatus(newStatus);
-            } else {
-                throw new IllegalArgumentException("Transición de estado no válida.");
-            }
-        }
-        return taskToUpdate;
-    }*/
-
     public Task updateTaskStatus(UUID taskId, TaskStatus newStatus) {
         Task task =  taskRepository.findById(taskId).orElse(null);
-        TaskStatus currentStatus = task.getTaskStatus();  //.getStatus();
+        TaskStatus currentStatus = task.getTaskStatus();
 
         if (!currentStatus.isValidStatus(newStatus)) {
             throw new IllegalArgumentException("No es posible asignar al estado " + newStatus +
                     " una tarea con estado " + currentStatus);
         }
 
-        // Realiza la actualización del estado aquí
-        task.setTaskStatus(newStatus); //setStatus(newStatus);
-        // ...
+        task.setTaskStatus(newStatus);
         return task;
     }
 
-   /* private boolean isValidStatus(TaskStatus currentStatus, TaskStatus newStatus) {
-        switch (currentStatus) {
-            case TODO:
-                return newStatus == TaskStatus.INPROGRESS;
-            case INPROGRESS:
-                return newStatus == TaskStatus.DONE || newStatus == TaskStatus.BLOCKED;
-            case BLOCKED:
-                return newStatus == TaskStatus.INPROGRESS || newStatus == TaskStatus.DONE;
-         //   case DONE:
-           //     return newStatus == TaskStatus.BLOCKED; CREO QUE DONE NO SE ACTUALIZA A NADA
-            default:
-                return false;
-        }
-    }*/
-
-
+    public Task getByStatus(TaskStatus status){
+        return this.taskRepository.findByStatus(status);
+    }
 
 }

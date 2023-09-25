@@ -2,6 +2,7 @@ package com.example.kanban.entitys;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import org.antlr.v4.runtime.misc.NotNull;
 import org.hibernate.annotations.GenericGenerator;
 
 import java.io.Serializable;
@@ -19,20 +20,25 @@ public class Task implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "project_id")
+    @NotNull
     private Project project;
 
     @Column(name = "name")
+    @NotNull
     private String name;
 
     @Column(name = "description")
+    @NotNull
     private String description;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "task_Status")
+    @NotNull
     private TaskStatus taskStatus;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "task_Type")
+    @NotNull
     private TaskType taskType;
 
     @Column(name = "due_date")

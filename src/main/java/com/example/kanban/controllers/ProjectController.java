@@ -43,7 +43,7 @@ public class ProjectController {
     @GetMapping("/pageable")
     public ResponseEntity<Page<Project>> getAllProjects(
             @RequestParam(defaultValue = "0")
-            int page, @RequestParam(defaultValue = "10") int size) {
+            int page, @RequestParam(defaultValue = "5") int size) {
         PageRequest pageRequest = PageRequest.of(page, size);
         Page<Project> projects = projectServices.getAllProjects(pageRequest);
         return ResponseEntity.ok(projects);
@@ -55,19 +55,14 @@ public class ProjectController {
     }
 
     @PostMapping()
-    public Project createProject(@RequestBody Project project){
-        return this.projectServices.createProject(project);
-    }
-
-    @PostMapping("/pruebaPost")
     public ResponseEntity<String> createProject1(@RequestBody Project project) {
 
-        if (project.getName().isEmpty() || project.getName() == "" ){
+
+        if (project.getName() == null || project.getName().isEmpty()) {
 
             return new ResponseEntity<>("El nombre del projecto es obligatorio", HttpStatus.BAD_REQUEST);
         }
                    project.setProjectStatus(ProjectStatus.ACTIVE);
-               //    project.setCreatedDate(new Data());
                    this.projectServices.createProject(project);
         return new ResponseEntity<>("Proyecto creado con éxito", HttpStatus.CREATED);
 

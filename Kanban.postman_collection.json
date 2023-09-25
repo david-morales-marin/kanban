@@ -1,0 +1,226 @@
+{
+	"info": {
+		"_postman_id": "c943b3d4-b2fb-4768-bca3-ba28827077cd",
+		"name": "Kanban",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20727857"
+	},
+	"item": [
+		{
+			"name": "GetPageable",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8090/v1/projects/pageable",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"v1",
+						"projects",
+						"pageable"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PostProject",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"project 1\",\r\n    \"description\": \"project #1 description\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8090/v1/projects",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"v1",
+						"projects"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetProjectList",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8090/v1/projects/list",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"v1",
+						"projects",
+						"list"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PostProjectSimple",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"project 3\",\r\n    \"description\": \"project #1 description\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8090/v1/projects",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"v1",
+						"projects"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PostTask",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"task #1\",\r\n    \"description\": \"task #2 description\",\r\n    \"taskType\": \"BUG\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8090/v1/projects/470d1fc2-bfee-448d-a3f4-1305aa7963d5/tasks",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"v1",
+						"projects",
+						"470d1fc2-bfee-448d-a3f4-1305aa7963d5",
+						"tasks"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetTaskProjectID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8090/v1/projects/470d1fc2-bfee-448d-a3f4-1305aa7963d5/board",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"v1",
+						"projects",
+						"470d1fc2-bfee-448d-a3f4-1305aa7963d5",
+						"board"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetAllTask",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8090/v1/listaTask",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"v1",
+						"listaTask"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New Request",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8090/v1/projects/b0efd4e6-1f2c-4dcf-bd7b-1104348fab94/tareas",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"v1",
+						"projects",
+						"b0efd4e6-1f2c-4dcf-bd7b-1104348fab94",
+						"tareas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PutStatus",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"taskStatus\": \"INPROGRESS\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8090/v1/c89fab5d-0fb7-4acf-8060-d3e569c75490/prueba1",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"v1",
+						"c89fab5d-0fb7-4acf-8060-d3e569c75490",
+						"prueba1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
