@@ -17,7 +17,6 @@ public class Task implements Serializable {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-
     @ManyToOne
     @JoinColumn(name = "project_id")
     @NotNull
@@ -32,6 +31,7 @@ public class Task implements Serializable {
     private String description;
 
     @Enumerated(EnumType.STRING)
+
     @Column(name = "task_Status")
     @NotNull
     private TaskStatus taskStatus;

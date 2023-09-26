@@ -58,46 +58,50 @@ public class TaskController {
     @PatchMapping("/{id}")
     public ResponseEntity<?> updateTaskStatus(
             @PathVariable UUID id,
-            @RequestBody TaskStatus updateRequest) {
+            @RequestBody Map<String, String> updateRequest) {
 
-        Task currentTask = taskServices.getTaskById(id).orElseGet(null);
+        Task currentTask = taskServices.getTaskById(id).orElse(null);
         if (currentTask == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
 
-        boolean isValidUpdate = false;
+        String statusString = updateRequest.get("task_Status");
+        TaskStatus updateStatus;
 
-        switch (updateRequest) {
-            case TODO:
-                isValidUpdate = currentTask.getTaskStatus() == TaskStatus.INPROGRESS;
-                break;
-            case INPROGRESS:
-                isValidUpdate = currentTask.getTaskStatus() == TaskStatus.DONE ||
-                        currentTask.getTaskStatus() == TaskStatus.BLOCKED;
-                break;
-            case BLOCKED:
-                isValidUpdate = currentTask.getTaskStatus() == TaskStatus.INPROGRESS ||
-                        currentTask.getTaskStatus() == TaskStatus.DONE;
-                break;
-            case DONE:
-                /* DONE no se actualiza a ningún estado, así que no hay condiciones aquí.
-                /igual preguntar al profe si deberia colocar alguna condicion en DONE*/
-                isValidUpdate = true;
-                break;
-            default:
-                break;
-        }
-
-        if (!isValidUpdate) {
+        try {
+            updateStatus = TaskStatus.fromString(statusString);
+        } catch (IllegalArgumentException e) {
             Map<String, String> errorResponse = new HashMap<>();
-            errorResponse.put("mensaje", "El estado " + updateRequest + " no es válido para la tarea actual con estado " + currentTask.getTaskStatus());
+            errorResponse.put("mensaje", "El estado " + statusString + " no es válido");
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
         }
 
-        currentTask.setTaskStatus(updateRequest);
-        this.taskServices.saveTaskUpdateStatus(currentTask);
+        boolean isValidUpdate = false;
 
-        return ResponseEntity.ok().build();
+        if(currentTask.getTaskStatus() == TaskStatus.TODO){
+           isValidUpdate = updateStatus == TaskStatus.TODO || updateStatus == TaskStatus.INPROGRESS;
+        }else if(currentTask.getTaskStatus() == TaskStatus.INPROGRESS){
+            isValidUpdate = updateStatus == TaskStatus.BLOCKED || updateStatus == TaskStatus.DONE;
+        }else if(currentTask.getTaskStatus() == TaskStatus.BLOCKED){
+            isValidUpdate = updateStatus == TaskStatus.DONE || updateStatus == TaskStatus.INPROGRESS;
+        }else if(currentTask.getTaskStatus() == TaskStatus.DONE){
+            isValidUpdate = updateStatus == TaskStatus.DONE;
+        }
+
+
+        if (!isValidUpdate) {
+            Map<String, String> errorResponse = new HashMap<>();
+            errorResponse.put("Mensaje", "El estado " + updateStatus + " no es válido para la tarea actual con estado " + currentTask.getTaskStatus());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
+        }else{
+            Map<String, String> statusUpdate = new HashMap<>();
+            statusUpdate.put("Mensaje", "El estado de la Tarea:  " + currentTask.getName() + " del Projecto: " + currentTask.getProject().getName() +
+                    " ha sido actualizado correctamente al estado: " + updateStatus);
+            currentTask.setTaskStatus(updateStatus);
+            taskServices.saveTaskUpdateStatus(currentTask);
+           return  ResponseEntity.status(HttpStatus.CREATED).body(statusUpdate);
+        }
     }
+
 
 }

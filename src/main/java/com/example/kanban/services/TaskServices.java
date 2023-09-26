@@ -53,19 +53,6 @@ public class TaskServices {
         return taskRepository.save(task);
     }
 
-    public Task updateTaskStatus(UUID taskId, TaskStatus newStatus) {
-        Task task =  taskRepository.findById(taskId).orElse(null);
-        TaskStatus currentStatus = task.getTaskStatus();
-
-        if (!currentStatus.isValidStatus(newStatus)) {
-            throw new IllegalArgumentException("No es posible asignar al estado " + newStatus +
-                    " una tarea con estado " + currentStatus);
-        }
-
-        task.setTaskStatus(newStatus);
-        return task;
-    }
-
     public Task getByStatus(TaskStatus status){
         return this.taskRepository.findByStatus(status);
     }
