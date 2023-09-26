@@ -14,7 +14,6 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "Project")
-//@JsonIgnoreProperties(ignoreUnknown = true)
 public class Project implements Serializable {
 
     @Id

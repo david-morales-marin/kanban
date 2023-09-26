@@ -88,7 +88,6 @@ public class TaskController {
             isValidUpdate = updateStatus == TaskStatus.DONE;
         }
 
-
         if (!isValidUpdate) {
             Map<String, String> errorResponse = new HashMap<>();
             errorResponse.put("Mensaje", "El estado " + updateStatus + " no es válido para la tarea actual con estado " + currentTask.getTaskStatus());
@@ -102,6 +101,7 @@ public class TaskController {
            return  ResponseEntity.status(HttpStatus.CREATED).body(statusUpdate);
         }
     }
+
 
 
 }

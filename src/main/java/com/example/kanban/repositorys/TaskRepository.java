@@ -16,4 +16,5 @@ import java.util.UUID;
 public interface TaskRepository extends JpaRepository<Task, UUID> {
     @Query("SELECT t FROM Task t WHERE t.taskStatus = :status")
     Task findByStatus(TaskStatus status);
+    List<Task> findByProjectId(UUID id);
 }

@@ -1,9 +1,7 @@
 package com.example.kanban.controllers;
 
-import com.example.kanban.entitys.Pagination;
-import com.example.kanban.entitys.Project;
-import com.example.kanban.entitys.ProjectStatus;
-import com.example.kanban.entitys.Task;
+import com.example.kanban.entitys.*;
+import com.example.kanban.models.ProjectBoardResponse;
 import com.example.kanban.services.ProjectServices;
 import com.example.kanban.services.TaskServices;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @RestController()
 @RequestMapping("/v1/projects")
@@ -78,7 +77,7 @@ public class ProjectController {
          this.projectServices.deleteProject(id);
     }
 
-    @GetMapping("/{projectId}/board")
+  /*  @GetMapping("/{projectId}/board")
     public ResponseEntity<List<Task>> getTasksInProject(@PathVariable UUID projectId) {
 
         Project project = projectServices.finById(projectId);
@@ -91,6 +90,21 @@ public class ProjectController {
             return new ResponseEntity<>(tasks, HttpStatus.CREATED);
         }
 
+    }*/
+
+    @GetMapping("/{id}/board")
+    public ResponseEntity<ProjectBoardResponse> getTaskByProject(@PathVariable("id") UUID id){
+        ProjectBoardResponse result = projectServices.getTaskByProject(id);
+
+        if (result == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } else {
+
+
+            return ResponseEntity.ok(result);
+        }
+
+      //  return ResponseEntity.ok(result);
     }
 
 }
