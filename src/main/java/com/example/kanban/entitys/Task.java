@@ -1,5 +1,6 @@
 package com.example.kanban.entitys;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import org.antlr.v4.runtime.misc.NotNull;
@@ -42,7 +43,8 @@ public class Task implements Serializable {
     private TaskType taskType;
 
     @Column(name = "due_date")
-    private LocalDateTime dueDate = LocalDateTime.now();
+    //@JsonFormat(pattern = "yyyy/MM/dd")
+    private LocalDateTime dueDate;
 
     @Column(name = "created_date")
     private LocalDateTime createdDate = LocalDateTime.now();

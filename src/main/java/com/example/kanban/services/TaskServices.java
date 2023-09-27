@@ -10,9 +10,11 @@ import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class TaskServices {
@@ -34,6 +36,15 @@ public class TaskServices {
 
     public Task createTask(Task task){
         return this.taskRepository.save(task);
+    }
+    public List<Task> getAllTaskexpired(UUID project_id) throws ChangeSetPersister.NotFoundException {
+        Project project = this.projectRepository.findById(project_id)
+                .orElseThrow(() -> new ChangeSetPersister.NotFoundException());
+
+        LocalDateTime dateToday = LocalDateTime.now();
+        return project.getTasks().stream()
+                .filter(task -> dateToday.isAfter(task.getDueDate()))
+                .collect(Collectors.toList());
     }
 
     public List<Task> getAllTask(){

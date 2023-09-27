@@ -1,4 +1,4 @@
-/*package com.example.kanban.security;
+/* package com.example.kanban.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -14,8 +14,12 @@ import org.springframework.security.web.SecurityFilterChain;
 
 public class WebSecurityConfig {
 
+    private final JWTAuthorizationFilter jwtAuthorizationFilter;
+
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http, AuthenticationManager authManager) throws Exception {
+        JwtAuthenticationFilter jwtAuthenticationFilter = new JwtAuthenticationFilter();
+        jwtAuthenticationFilter
         return  http
                 .csrf().disable()
                 .authorizeHttpRequests()

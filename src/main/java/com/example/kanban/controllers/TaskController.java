@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.*;
 @RestController()
 @RequestMapping("/v1")
@@ -33,13 +35,36 @@ public class TaskController {
         this.taskServices.deleteTaskById(id);
     }
 
+    //GET /v1/projects/{id}/due-task
+    @GetMapping("/projects/{project_id}/due-task")
+    public ResponseEntity<List<Task>> getAllTasksexpired(@PathVariable UUID project_id) throws ChangeSetPersister.NotFoundException {
+
+        List<Task> tasks = this.taskServices.getAllTaskexpired(project_id);
+        LocalDateTime dateToday = LocalDateTime.now();
+        List<Task> expiredTasks = new ArrayList<>();
+
+        for (Task task : tasks) {
+            if (dateToday.isAfter(task.getDueDate())) {
+                expiredTasks.add(task);
+            }
+        }
+
+        if (!expiredTasks.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.ACCEPTED).body(expiredTasks);
+        } else {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+        }
+    }
+
+
     @PostMapping("/projects/{project_id}/tasks")
     public ResponseEntity<Task> createTask(@PathVariable UUID project_id, @RequestBody Task task) throws
             ChangeSetPersister.NotFoundException {
 
              if(task.getName() == null || task.getName().isEmpty() ||
                task.getTaskType() == null ||
-               task.getDescription() == null || task.getDescription().isEmpty()){
+               task.getDescription() == null || task.getDescription().isEmpty() // ||
+              /* task.getDueDate() == null*/){
 
             /* puedo mejorar esto, creando una clase donde tenga el manejo de excepciones
             y mande un "mensaje" que diga el porque no esta creando nada

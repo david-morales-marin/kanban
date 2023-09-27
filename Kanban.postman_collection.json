@@ -33,7 +33,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"project 1\",\r\n    \"description\": \"project #1 description\"\r\n}",
+					"raw": "{\r\n    \"name\": \"project 2\",\r\n    \"description\": \"project #2 description\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -109,7 +109,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"task #1\",\r\n    \"description\": \"task #2 description\",\r\n    \"taskType\": \"BUG\"\r\n}",
+					"raw": "{\r\n    \"name\": \"task #55\",\r\n    \"description\": \"task #55 description\",\r\n    \"taskType\": \"BUG\" , \r\n    \"due_Date\": \"2023-09-30\"\r\n\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -117,7 +117,7 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:8090/v1/projects/470d1fc2-bfee-448d-a3f4-1305aa7963d5/tasks",
+					"raw": "localhost:8090/v1/projects/75c0d024-c007-497f-8fa5-9ceda1628c06/tasks",
 					"host": [
 						"localhost"
 					],
@@ -125,7 +125,7 @@
 					"path": [
 						"v1",
 						"projects",
-						"470d1fc2-bfee-448d-a3f4-1305aa7963d5",
+						"75c0d024-c007-497f-8fa5-9ceda1628c06",
 						"tasks"
 					]
 				}
@@ -138,7 +138,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:8090/v1/projects/470d1fc2-bfee-448d-a3f4-1305aa7963d5/board",
+					"raw": "localhost:8090/v1/projects/10257d8d-eb0f-4463-9f17-6ba2303009c1/board",
 					"host": [
 						"localhost"
 					],
@@ -146,7 +146,7 @@
 					"path": [
 						"v1",
 						"projects",
-						"470d1fc2-bfee-448d-a3f4-1305aa7963d5",
+						"10257d8d-eb0f-4463-9f17-6ba2303009c1",
 						"board"
 					]
 				}
@@ -178,7 +178,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:8090/v1/projects/b0efd4e6-1f2c-4dcf-bd7b-1104348fab94",
+					"raw": "localhost:8090/v1/projects/b0efd4e6-1f2c-4dcf-bd7b-1104348fab94/tareas",
 					"host": [
 						"localhost"
 					],
@@ -186,7 +186,8 @@
 					"path": [
 						"v1",
 						"projects",
-						"b0efd4e6-1f2c-4dcf-bd7b-1104348fab94"
+						"b0efd4e6-1f2c-4dcf-bd7b-1104348fab94",
+						"tareas"
 					]
 				}
 			},
@@ -199,7 +200,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"taskStatus\": \"INPROGRESS\"\r\n}",
+					"raw": "{\r\n      \"task_Status\": \"INPROGRESS\"\r\n   //    \"taskStatus\": \"DONE\"\r\n}\r\n",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -207,14 +208,56 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:8090/v1/c89fab5d-0fb7-4acf-8060-d3e569c75490/prueba1",
+					"raw": "localhost:8090/v1/683d335e-a783-43ea-aeaf-6bf772e7c4cd",
 					"host": [
 						"localhost"
 					],
 					"port": "8090",
 					"path": [
 						"v1",
-						"c89fab5d-0fb7-4acf-8060-d3e569c75490"
+						"683d335e-a783-43ea-aeaf-6bf772e7c4cd"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DateExpired",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8090/v1/projects/10257d8d-eb0f-4463-9f17-6ba2303009c1/due-task",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"v1",
+						"projects",
+						"10257d8d-eb0f-4463-9f17-6ba2303009c1",
+						"due-task"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "BOARD",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8090/v1/projects/10257d8d-eb0f-4463-9f17-6ba2303009c1/board",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"v1",
+						"projects",
+						"10257d8d-eb0f-4463-9f17-6ba2303009c1",
+						"board"
 					]
 				}
 			},

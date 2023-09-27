@@ -77,21 +77,6 @@ public class ProjectController {
          this.projectServices.deleteProject(id);
     }
 
-  /*  @GetMapping("/{projectId}/board")
-    public ResponseEntity<List<Task>> getTasksInProject(@PathVariable UUID projectId) {
-
-        Project project = projectServices.finById(projectId);
-
-        if (project == null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        } else {
-            List<Task> tasks = project.getTasks();
-
-            return new ResponseEntity<>(tasks, HttpStatus.CREATED);
-        }
-
-    }*/
-
     @GetMapping("/{id}/board")
     public ResponseEntity<ProjectBoardResponse> getTaskByProject(@PathVariable("id") UUID id){
         ProjectBoardResponse result = projectServices.getTaskByProject(id);
@@ -100,11 +85,9 @@ public class ProjectController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } else {
 
-
             return ResponseEntity.ok(result);
         }
 
-      //  return ResponseEntity.ok(result);
     }
 
 }
