@@ -24,10 +24,13 @@ public class ProjectServices {
     @Autowired
     private ProjectRepository projectRepository;
 
+
+
     @Autowired
     private TaskRepository taskRepository;
 
     public ProjectServices (ProjectRepository projectRepository){
+
         this.projectRepository = projectRepository;
     }
     public List<Project> getListaProject(){
