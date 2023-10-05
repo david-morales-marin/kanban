@@ -16,7 +16,7 @@ public class Contacto {
 
     private String nombre;
 
-    @Column(name = "fechanac")
+    @Column(name = "fecha_nac")
     private LocalDate fechaNacimiento;
 
     private String celular;
