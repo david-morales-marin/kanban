@@ -3,13 +3,18 @@ package com.example.kanban.services;
 import com.example.kanban.constantes.Constantes;
 import com.example.kanban.entitys.credenciales.Usuario;
 import com.example.kanban.repositorys.UsuarioRepository;
+import com.example.kanban.security.CustomerDetailsService;
+import com.example.kanban.security.jwt.JwtUtil;
 import com.example.kanban.utils.ProjectUtils;
 import io.micrometer.common.util.internal.logging.InternalLogger;
 import lombok.extern.slf4j.Slf4j;
 
+import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;
@@ -21,6 +26,15 @@ public class UsuarioServices {
 
     @Autowired
     private UsuarioRepository usuarioRepository;
+
+    @Autowired
+    private AuthenticationManager authenticationManager;
+
+    @Autowired
+    private CustomerDetailsService customerDetailsService;
+
+    @Autowired
+    private JwtUtil jwtUtil;
 
     InternalLogger log;
     public ResponseEntity<String> signUp(Map<String , String> requestMap){
@@ -66,6 +80,25 @@ public class UsuarioServices {
     }
 
     public ResponseEntity<String> login(Map<String , String> requestMap){
-        return null;
+
+        log.info("Dentro del login");
+        try {
+            Authentication authentication = authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(requestMap.get("email"), requestMap.get("password"))
+            );
+
+            if(authentication.isAuthenticated()){
+                if(customerDetailsService.getUserDetail().getStatus().equalsIgnoreCase("true")){
+                    return new ResponseEntity<String>("{\"token de acceso\":\"" + jwtUtil.generateToken(customerDetailsService.getUserDetail().getEmail(),
+                            customerDetailsService.getUserDetail().getRol()) + "\"}", HttpStatus.OK);
+                }else{
+                    return new ResponseEntity<String>("Espere la aprobación del administrador " , HttpStatus.BAD_REQUEST);
+                }
+            }
+
+        }catch (Exception e){
+            log.error("{}" , e);
+        }
+        return new ResponseEntity<String>("Credenciales incorrectas" , HttpStatus.BAD_REQUEST);
     }
 }

@@ -68,4 +68,22 @@ public class TaskServices {
         return this.taskRepository.findByStatus(status);
     }
 
+    /*public Boolean isValidUpdate(){
+        Task currentTask = taskServices.getTaskById(id).orElse(null);
+
+        boolean isValidUpdate = false;
+
+        if(currentTask.getTaskStatus() == TaskStatus.TODO){
+            isValidUpdate = updateStatus == TaskStatus.TODO || updateStatus == TaskStatus.INPROGRESS;
+        }else if(currentTask.getTaskStatus() == TaskStatus.INPROGRESS){
+            isValidUpdate = updateStatus == TaskStatus.BLOCKED || updateStatus == TaskStatus.DONE;
+        }else if(currentTask.getTaskStatus() == TaskStatus.BLOCKED){
+            isValidUpdate = updateStatus == TaskStatus.DONE || updateStatus == TaskStatus.INPROGRESS;
+        }else if(currentTask.getTaskStatus() == TaskStatus.DONE){
+            isValidUpdate = updateStatus == TaskStatus.DONE;
+        }
+
+        return isValidUpdate;
+    }*/
+
 }

@@ -63,8 +63,7 @@ public class TaskController {
 
              if(task.getName() == null || task.getName().isEmpty() ||
                task.getTaskType() == null ||
-               task.getDescription() == null || task.getDescription().isEmpty() // ||
-              /* task.getDueDate() == null*/){
+               task.getDescription() == null || task.getDescription().isEmpty()){
 
             /* puedo mejorar esto, creando una clase donde tenga el manejo de excepciones
             y mande un "mensaje" que diga el porque no esta creando nada
@@ -121,10 +120,12 @@ public class TaskController {
             Map<String, String> statusUpdate = new HashMap<>();
             statusUpdate.put("Mensaje", "El estado de la Tarea:  " + currentTask.getName() + " del Projecto: " + currentTask.getProject().getName() +
                     " ha sido actualizado correctamente al estado: " + updateStatus);
+
             currentTask.setTaskStatus(updateStatus);
             taskServices.saveTaskUpdateStatus(currentTask);
            return  ResponseEntity.status(HttpStatus.CREATED).body(statusUpdate);
         }
+
     }
 
 

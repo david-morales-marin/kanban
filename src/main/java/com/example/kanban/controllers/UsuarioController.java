@@ -15,7 +15,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping(path = "/usuario")
-public class UsiarioController {
+public class UsuarioController {
 
     @Autowired
     UsuarioServices usuarioServices;
@@ -24,11 +24,22 @@ public class UsiarioController {
     public ResponseEntity<String> registrarUsuario(@RequestBody(required = true)Map<String , String> requestMap){
 
         try{
-             usuarioServices.signUp(requestMap);
+            return usuarioServices.signUp(requestMap);
         }catch (Exception e){
             e.printStackTrace();
         }
          return ProjectUtils.getResponseEntity(Constantes.SOMETHING_WENT_WRONG , HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+
+    @PostMapping("/login")
+    public ResponseEntity<String> login(@RequestBody(required = true) Map<String , String> requestMap){
+        try{
+             return usuarioServices.login(requestMap);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return  ProjectUtils.getResponseEntity(Constantes.SOMETHING_WENT_WRONG, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
 }
