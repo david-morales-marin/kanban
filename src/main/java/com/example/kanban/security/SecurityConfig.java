@@ -1,4 +1,4 @@
-package com.example.kanban.security;
+/*package com.example.kanban.security;
 
 import com.example.kanban.security.jwt.JwtFilter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,40 +17,21 @@ import org.springframework.web.cors.CorsConfiguration;
 
 @Configuration
 @EnableWebSecurity
-public class SecurityConfig {
+public class SecurityConfig extends WebSecurityConfig{*/
 
-    @Autowired
-    private CustomerDetailsService customerDetailsService;
+    // @Autowired
+    // private CustomerDetailsService customerDetailsService;
 
-    @Autowired
+   /* @Autowired
     private JwtFilter jwtFilter;
 
     @Bean
     public PasswordEncoder passwordEncoder(){
         return NoOpPasswordEncoder.getInstance();
-    }
+    }*/
 
-    @Bean
-    protected SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
-        httpSecurity.cors().configurationSource(request -> new CorsConfiguration().applyPermitDefaultValues())
-                .and()
-                .csrf().disable()
-                .authorizeHttpRequests()
-                .requestMatchers("/user/login" , "user/signup","user/forgotPassword")
-                .permitAll()
-                .anyRequest()
-                .authenticated()
-                .and().exceptionHandling()
-                .and().sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-        httpSecurity.addFilterBefore(jwtFilter , UsernamePasswordAuthenticationFilter.class);
-
-        return httpSecurity.build();
-    }
-
-
-    @Bean
+  /*  @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws  Exception{
            return  authenticationConfiguration.getAuthenticationManager();
     }
-}
+}*/

@@ -1,6 +1,7 @@
 package com.example.kanban.security.jwt;
 
-import com.example.kanban.security.CustomerDetailsService;
+//import com.example.kanban.security.CustomerDetailsService;
+import com.example.kanban.services.UsuarioServices;
 import io.jsonwebtoken.Claims;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -20,16 +21,19 @@ import java.io.IOException;
 public class JwtFilter extends OncePerRequestFilter {
 
     @Autowired
-    private JwtUtil jwtUtil;
+    private JwtUtilService jwtUtil;
 
     @Autowired
-    private CustomerDetailsService customerDetailsService;
+    private UsuarioServices usuarioServices;
+
+    //@Autowired
+    //private CustomerDetailsService customerDetailsService;
 
     private String username = null;
 
     Claims claims = null;
 
-    @Override
+    /*@Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
             if(request.getServletPath().matches("/user/login|user/forgotPasword|/user/signup")){
                 filterChain.doFilter(request,response);
@@ -54,6 +58,32 @@ public class JwtFilter extends OncePerRequestFilter {
                 }
                 filterChain.doFilter(request,response);
             }
+    }*/
+
+    @Override
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+        final String authorizationHeader = request.getHeader("Authorization");
+
+        String username = null;
+        String jwt = null;
+
+        if(authorizationHeader != null && authorizationHeader.startsWith("Bearer ")){
+            jwt = authorizationHeader.substring(7);
+            username = jwtUtil.extractUsername(jwt);
+        }
+
+        if(username != null && SecurityContextHolder.getContext().getAuthentication() == null){
+            UserDetails userDetails = this.usuarioServices.loadUserByUsername(username);
+
+            if(jwtUtil.validateToken(jwt , userDetails)){
+                UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
+                        userDetails, null , userDetails.getAuthorities()
+                );
+                authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+                SecurityContextHolder.getContext().setAuthentication(authenticationToken);
+            }
+        }
+        filterChain.doFilter(request , response);
     }
 
     public Boolean isAdmin(){

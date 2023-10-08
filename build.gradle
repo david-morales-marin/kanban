@@ -19,6 +19,7 @@ configurations {
 
 repositories {
 	mavenCentral()
+	jcenter()
 }
 
 ext {
@@ -35,6 +36,8 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-web-services'
 	implementation group: 'com.vaadin.external.google', name: 'android-json', version: '0.0.20131108.vaadin1'
+
+
 
 	//implementation group: 'com.auth0', name: 'java-jwt', version: '4.4.0'
 
@@ -65,7 +68,9 @@ dependencyManagement {
 		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
 	}
 }
-
+test {
+	useJUnitPlatform()
+}
 tasks.named('test') {
 	useJUnitPlatform()
 }

@@ -1,4 +1,4 @@
-package com.example.kanban.security;
+/*package com.example.kanban.security;
 
 import com.example.kanban.entitys.credenciales.Usuario;
 import com.example.kanban.repositorys.UsuarioRepository;
@@ -41,3 +41,4 @@ public class CustomerDetailsService implements UserDetailsService {
         return userDetail;
     }
 }
+*/

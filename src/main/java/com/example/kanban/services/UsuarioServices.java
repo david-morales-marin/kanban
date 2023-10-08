@@ -3,18 +3,20 @@ package com.example.kanban.services;
 import com.example.kanban.constantes.Constantes;
 import com.example.kanban.entitys.credenciales.Usuario;
 import com.example.kanban.repositorys.UsuarioRepository;
-import com.example.kanban.security.CustomerDetailsService;
-import com.example.kanban.security.jwt.JwtUtil;
+//import com.example.kanban.security.CustomerDetailsService;
+import com.example.kanban.security.jwt.JwtUtilService;
 import com.example.kanban.utils.ProjectUtils;
 import io.micrometer.common.util.internal.logging.InternalLogger;
 import lombok.extern.slf4j.Slf4j;
 
-import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;
@@ -22,21 +24,42 @@ import java.util.Objects;
 
 @Slf4j
 @Service
-public class UsuarioServices {
+public class UsuarioServices implements UserDetailsService {
 
-    @Autowired
-    private UsuarioRepository usuarioRepository;
+   // @Autowired
+   // private UsuarioRepository usuarioRepository;
 
-    @Autowired
-    private AuthenticationManager authenticationManager;
+   // @Autowired
+   // private AuthenticationManager authenticationManager;
 
-    @Autowired
-    private CustomerDetailsService customerDetailsService;
+    // @Autowired
+    // private CustomerDetailsService customerDetailsService;
 
-    @Autowired
-    private JwtUtil jwtUtil;
+    //@Autowired
+    //private JwtUtilService jwtUtil;
 
-    InternalLogger log;
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        Map<String , String> usuarios = Map.of(
+                "david", "USER",
+                "KAREN", "admin"
+        );
+
+        String rol = usuarios.get(username);
+        if (rol != null){
+            User.UserBuilder userBuilder = User.withUsername(username);
+            String encryptedPassword = "$dwefrkofnewouiewdiwenfefkwepmlkemf";
+            userBuilder.password(encryptedPassword).roles(rol);
+            return  userBuilder.build();
+        }else{
+            throw new UsernameNotFoundException(username);
+        }
+
+    }
+
+
+
+  /*  InternalLogger log;
     public ResponseEntity<String> signUp(Map<String , String> requestMap){
         log.info("Registro interno de un usuario {} " , requestMap);
         try{
@@ -64,12 +87,12 @@ public class UsuarioServices {
             return true;
         }
         return false;
-    }
+    }*/
 
-    private Usuario getUserFromMap(Map<String , String> requestMap){
+    /*private Usuario getUserFromMap(Map<String , String> requestMap){
 
         Usuario usuario = new Usuario();
-        usuario.setNombre(requestMap.get("nombre"));
+        usuario.setUsuario(requestMap.get("usuario"));
         usuario.setEmail(requestMap.get("email"));
         usuario.setPassword(requestMap.get("password"));
         usuario.setStatus(requestMap.get("false"));
@@ -77,9 +100,9 @@ public class UsuarioServices {
 
         return usuario;
 
-    }
+    }*/
 
-    public ResponseEntity<String> login(Map<String , String> requestMap){
+  /*  public ResponseEntity<String> login(Map<String , String> requestMap){
 
         log.info("Dentro del login");
         try {
@@ -100,5 +123,5 @@ public class UsuarioServices {
             log.error("{}" , e);
         }
         return new ResponseEntity<String>("Credenciales incorrectas" , HttpStatus.BAD_REQUEST);
-    }
+    }*/
 }
