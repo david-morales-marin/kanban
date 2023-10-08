@@ -1,10 +1,6 @@
 package com.example.kanban.servicesTest;
 
 import com.example.kanban.entitys.Project;
-import com.example.kanban.entitys.Task;
-import com.example.kanban.entitys.TaskStatus;
-import com.example.kanban.models.BoardResponse;
-import com.example.kanban.models.ProjectBoardResponse;
 import com.example.kanban.repositorys.ProjectRepository;
 import com.example.kanban.repositorys.TaskRepository;
 import com.example.kanban.services.ProjectServices;
@@ -15,7 +11,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 
@@ -43,10 +38,8 @@ public class ProjectServicesTest {
         MockitoAnnotations.openMocks(this);
     }
 
-
     @Test
     public void SuccessGetListaProject(){
-
         Project project1 = new Project();
         Project project2 = new Project();
 
