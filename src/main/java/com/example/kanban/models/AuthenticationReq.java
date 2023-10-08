@@ -1,4 +1,4 @@
-package com.example.kanban.models;
+/*package com.example.kanban.models;
 
 import java.io.Serializable;
 
@@ -30,5 +30,4 @@ public class AuthenticationReq implements Serializable {
     public void setClave(String clave) {
         this.clave = clave;
     }
-}
-
+}*/
