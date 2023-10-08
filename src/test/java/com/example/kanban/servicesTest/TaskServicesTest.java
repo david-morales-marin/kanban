@@ -64,7 +64,7 @@ public class TaskServicesTest {
     }
 
     @Test
-    public void testGetAllTaskExpired() throws ChangeSetPersister.NotFoundException {
+    public void SuccessGetAllTaskExpired() throws ChangeSetPersister.NotFoundException {
         UUID projectId = UUID.randomUUID();
         Project mockProject = new Project();
         mockProject.setId(projectId);
@@ -106,7 +106,7 @@ public class TaskServicesTest {
     }
 
     @Test
-    public void SuccessSaveTaskUpdateStatus(){
+    public void SuccessSaveTaskUpdateStatus() {
          Task task = new Task();
 
         when(taskRepository.save(task)).thenReturn(task);
@@ -115,6 +115,46 @@ public class TaskServicesTest {
 
         assertNotNull(result);
         assertEquals(task , result);
-
     }
+
+    @Test
+    public void SuccessCreateTaskk() throws ChangeSetPersister.NotFoundException {
+        UUID projectId = UUID.randomUUID();
+        UUID taskId = UUID.randomUUID();
+
+        Project project = new Project();
+        project.setId(projectId);
+
+        Task task = new Task();
+        Task task1 = new Task();
+
+        List<Task> taskList = Arrays.asList(task,task1);
+        task.setId(taskId);
+
+        when(projectRepository.findById(projectId)).thenReturn(Optional.of(project));
+        when(taskRepository.findByProjectId(projectId)).thenReturn(taskList);
+        when(taskRepository.save(task)).thenReturn(task);
+
+        Task result = taskServices.createTaskk(projectId, task);
+
+        assertNotNull(result);
+        assertEquals(project, result.getProject());
+        assertEquals(taskId, result.getId());
+
+        verify(taskRepository, times(1)).save(task);
+    }
+
+    @Test
+    public void SuccessGetByStatus(){
+        Task task = new Task();
+        task.setTaskStatus(task.getTaskStatus());
+
+        when(taskRepository.findByStatus(task.getTaskStatus())).thenReturn(task);
+
+        Task result = taskServices.getByStatus(task.getTaskStatus());
+
+        assertNotNull(result);
+        assertEquals(task , result);
+    }
+
 }
