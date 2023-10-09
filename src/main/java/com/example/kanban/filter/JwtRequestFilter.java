@@ -1,4 +1,4 @@
-/*package com.example.kanban.filter;
+package com.example.kanban.filter;
 
 import com.example.kanban.services.JwtUtilService;
 import jakarta.servlet.FilterChain;
@@ -54,4 +54,4 @@ public class JwtRequestFilter extends OncePerRequestFilter {
         chain.doFilter(request, response);
     }
 
-}*/
+}

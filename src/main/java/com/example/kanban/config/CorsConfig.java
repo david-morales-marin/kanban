@@ -1,4 +1,5 @@
-/*package com.example.kanban.config;
+package com.example.kanban.config;
+
 
 import java.util.Arrays;
 import org.springframework.context.annotation.Bean;
@@ -19,4 +20,5 @@ public class CorsConfig {
         source.registerCorsConfiguration("/**", configuration);
         return source;
     }
-}*/
+}
+

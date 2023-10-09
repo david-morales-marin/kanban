@@ -3,8 +3,8 @@ package com.example.kanban.entitys;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import org.antlr.v4.runtime.misc.NotNull;
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.lang.NonNull;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -20,26 +20,26 @@ public class Task implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "project_id")
-    @NotNull
+    @NonNull
     private Project project;
 
     @Column(name = "name")
-    @NotNull
+    @NonNull
     private String name;
 
     @Column(name = "description")
-    @NotNull
+    @NonNull
     private String description;
 
     @Enumerated(EnumType.STRING)
 
     @Column(name = "task_Status")
-    @NotNull
+    @NonNull
     private TaskStatus taskStatus;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "task_Type")
-    @NotNull
+    @NonNull
     private TaskType taskType;
 
     @Column(name = "due_date")

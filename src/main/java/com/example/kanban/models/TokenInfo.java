@@ -1,5 +1,5 @@
-/* com.example.kanban.models;
+package com.example.kanban.models;
 
 import java.io.Serializable;
 
-public record TokenInfo(String jwtToken) {}*/
+public record TokenInfo(String jwtToken) {}

@@ -1,4 +1,5 @@
-/*package com.example.kanban.services;
+package com.example.kanban.services;
+
 
 import java.util.List;
 import java.util.Set;
@@ -29,18 +30,18 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     public static Usuario getById(String username) {
         // "secreto" => [BCrypt] => "$2a$10$56VCAiApLO8NQYeOPiu2De/EBC5RWrTZvLl7uoeC3r7iXinRR1iiq"
         var password = "$2a$10$56VCAiApLO8NQYeOPiu2De/EBC5RWrTZvLl7uoeC3r7iXinRR1iiq";
-        Usuario juan = new Usuario(
-                "jcabelloc",
+        Usuario david = new Usuario(
+                "david",
                 password,
                 Set.of("USER")
         );
 
-        Usuario maria = new Usuario(
-                "mlopez",
+        Usuario alejandra = new Usuario(
+                "alejandra",
                 password,
                 Set.of("ADMIN")
         );
-        var usuarios = List.of(juan, maria);
+        var usuarios = List.of(david, alejandra);
 
         return usuarios
                 .stream()
@@ -48,4 +49,4 @@ public class UserDetailsServiceImpl implements UserDetailsService {
                 .findFirst()
                 .orElse(null);
     }
-}*/
+}

@@ -9,6 +9,16 @@
 		{
 			"name": "GetPageable",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkYXZpZCIsImV4cCI6MTY5Njg1MzM5MiwiaWF0IjoxNjk2ODI0NTkyLCJyb2wiOnsiYXV0aG9yaXR5IjoiUk9MRV9VU0VSIn19.J9k2-2CnETGTz2sgF8lAzUN_LwcCmz9PqbHZ4iBo01E",
+							"type": "string"
+						}
+					]
+				},
 				"method": "GET",
 				"header": [],
 				"url": {
@@ -29,11 +39,21 @@
 		{
 			"name": "PostProject",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbGVqYW5kcmEiLCJleHAiOjE2OTY4NTQ4MDEsImlhdCI6MTY5NjgyNjAwMSwicm9sIjp7ImF1dGhvcml0eSI6IlJPTEVfQURNSU4ifX0.ihsa7AH0Ou7Pns49WnD-g4ZNxml54ZHk3jths6rCiwU",
+							"type": "string"
+						}
+					]
+				},
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"project 2\",\r\n    \"description\": \"project #2 description\"\r\n}",
+					"raw": "{\r\n    \"name\": \"project alejandra\",\r\n    \"description\": \"description alejandra\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -156,6 +176,16 @@
 		{
 			"name": "GetAllTask",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkYXZpZCIsImV4cCI6MTY5Njg1NDc2MywiaWF0IjoxNjk2ODI1OTYzLCJyb2wiOnsiYXV0aG9yaXR5IjoiUk9MRV9VU0VSIn19.MxsPLQB6nPuSPa-qKdaAWgrXNWTHlRWsf855PoeA1cU",
+							"type": "string"
+						}
+					]
+				},
 				"method": "GET",
 				"header": [],
 				"url": {
@@ -258,6 +288,50 @@
 						"projects",
 						"10257d8d-eb0f-4463-9f17-6ba2303009c1",
 						"board"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"usuario\": \"alejandra\",\r\n    \"clave\": \"secreto\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8090/v1/login/authenticate",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"v1",
+						"login",
+						"authenticate"
 					]
 				}
 			},
