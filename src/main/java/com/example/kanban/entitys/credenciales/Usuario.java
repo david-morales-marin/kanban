@@ -2,6 +2,7 @@ package com.example.kanban.entitys.credenciales;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
@@ -20,8 +21,8 @@ public class Usuario implements Serializable {
     @Column(name = "id_usuario")
     private Integer id;
 
-    @Column(name = "nombre")
-    private String nombre;
+    @Column(name = "usuario")
+    private String usuario;
 
     @Column(name = "email")
     private String email;
@@ -35,6 +36,15 @@ public class Usuario implements Serializable {
     @Column(name = "rol")
     private String rol;
 
+    public Usuario(String usuario, String password){
+        this.usuario = usuario;
+        this.password = password;
+    }
+
+    public Usuario() {
+
+    }
+
     public Integer getId() {
         return id;
     }
@@ -43,12 +53,12 @@ public class Usuario implements Serializable {
         this.id = id;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getUsuario() {
+        return usuario;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
     }
 
     public String getEmail() {
