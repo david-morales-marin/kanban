@@ -3,6 +3,8 @@ package com.example.kanban.services;
 
 import java.util.List;
 import java.util.Set;
+
+import com.example.kanban.models.AuthenticationReq;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -25,14 +27,34 @@ public class UserDetailsServiceImpl implements UserDetailsService {
                 .build();
     }
 
+
+
     public record Usuario(String username, String password, Set<String> roles) {};
+
+    public static AuthenticationReq getByIdprueba(AuthenticationReq username){
+
+        AuthenticationReq usuario = new AuthenticationReq(
+                username.getUsuario() ,
+                username.getClave()
+        );
+        Set.of("USER");
+
+        var usuarios = List.of(usuario);
+
+        return usuarios
+                .stream()
+                .filter(e -> e.getUsuario().equals(username))
+                .findFirst()
+                .orElse(null);
+    }
 
     public static Usuario getById(String username) {
         // "secreto" => [BCrypt] => "$2a$10$56VCAiApLO8NQYeOPiu2De/EBC5RWrTZvLl7uoeC3r7iXinRR1iiq"
         var password = "$2a$10$56VCAiApLO8NQYeOPiu2De/EBC5RWrTZvLl7uoeC3r7iXinRR1iiq";
+
         Usuario david = new Usuario(
-                "david",
-                password,
+                  "david",
+                     password,
                 Set.of("USER")
         );
 
