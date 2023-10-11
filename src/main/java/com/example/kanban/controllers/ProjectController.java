@@ -4,6 +4,8 @@ import com.example.kanban.entitys.*;
 import com.example.kanban.models.ProjectBoardResponse;
 import com.example.kanban.services.ProjectServices;
 import com.example.kanban.services.TaskServices;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -21,6 +23,7 @@ import java.util.stream.Collectors;
 
 @RestController()
 @RequestMapping("/v1/projects")
+@Api(tags = "API de Kanban", description = "Operaciones relacionadas con Kanban")
 public class ProjectController {
 
     @Autowired
@@ -35,6 +38,7 @@ public class ProjectController {
     }
 
     @GetMapping("/list")
+    @ApiOperation(value = "Obtener todas los projectos", notes = "Devuelve una lista de todas los projectos.")
     public List<Project> getProjects(){
         return this.projectServices.getListaProject();
     }
