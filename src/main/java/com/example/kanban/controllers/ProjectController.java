@@ -4,10 +4,10 @@ import com.example.kanban.entitys.*;
 import com.example.kanban.models.ProjectBoardResponse;
 import com.example.kanban.services.ProjectServices;
 import com.example.kanban.services.TaskServices;
-import io.swagger.annotations.Api;
+/*import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
+import io.swagger.annotations.ApiResponses; */
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -27,7 +27,7 @@ import java.util.stream.Collectors;
 
 @RestController()
 @RequestMapping("/v1/projects")
-@Api(tags = "Projects", description = "Controller Project")
+//@Api(tags = "Projects", description = "Controller Project")
 public class ProjectController {
 
     @Autowired
@@ -42,15 +42,15 @@ public class ProjectController {
     }
 
    // @PreAuthorize("hasRole('USER')") //autoriza que tipo de cosas quiere hacer
-    @SecurityRequirement(name = "bearerAuth")
-    @ApiOperation(value = "Obtener todas los projectos", notes = "Devuelve una lista de todos los projectos creados.")
+   // @SecurityRequirement(name = "bearerAuth")
+   /* @ApiOperation(value = "Obtener todas los projectos", notes = "Devuelve una lista de todos los projectos creados.")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Su respuesta ha sido exitosa."),
             @ApiResponse(code = 400, message = "Bad Request, Algo ingresaste mal. Verifica la información."),
             @ApiResponse(code = 301, message = "Credenciales erroneas o permisos no otorgados."),
             @ApiResponse(code = 403, message = "Credenciales insuficientes para visualizar la lista de los projectos."),
             @ApiResponse(code= 500, message = "Error inesperado del sistema, comuniquese con el proveedor")
-    })
+    })*/
     @GetMapping("/list")
     public List<Project> getProjects(){
         return this.projectServices.getListaProject();
