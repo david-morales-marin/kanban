@@ -4,30 +4,26 @@ import com.example.kanban.entitys.*;
 import com.example.kanban.models.ProjectBoardResponse;
 import com.example.kanban.services.ProjectServices;
 import com.example.kanban.services.TaskServices;
-/*import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses; */
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import javax.xml.crypto.Data;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 @RestController()
 @RequestMapping("/v1/projects")
-//@Api(tags = "Projects", description = "Controller Project")
+@SecurityRequirement(name = "BearerAuth")
+@Tag(name = "Project controller", description = "Los metodos para la creación de los projectos")
 public class ProjectController {
 
     @Autowired
@@ -41,16 +37,14 @@ public class ProjectController {
         this.projectServices = projectServices;
     }
 
-   // @PreAuthorize("hasRole('USER')") //autoriza que tipo de cosas quiere hacer
-   // @SecurityRequirement(name = "bearerAuth")
-   /* @ApiOperation(value = "Obtener todas los projectos", notes = "Devuelve una lista de todos los projectos creados.")
+    @Operation(summary = "Obtener todos los projectos", description = "Devuelve una lista de todos los projectos creados.")
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Su respuesta ha sido exitosa."),
-            @ApiResponse(code = 400, message = "Bad Request, Algo ingresaste mal. Verifica la información."),
-            @ApiResponse(code = 301, message = "Credenciales erroneas o permisos no otorgados."),
-            @ApiResponse(code = 403, message = "Credenciales insuficientes para visualizar la lista de los projectos."),
-            @ApiResponse(code= 500, message = "Error inesperado del sistema, comuniquese con el proveedor")
-    })*/
+            @ApiResponse(responseCode = "200" , description = "Su respuesta ha sido exitosa."),
+            @ApiResponse(responseCode = "400", description = "Bad Request, Algo ingresaste mal. Verifica la información."),
+            @ApiResponse(responseCode = "301", description = "Credenciales erroneas o permisos no otorgados."),
+            @ApiResponse(responseCode = "403", description = "Credenciales insuficientes para visualizar la lista de los projectos."),
+            @ApiResponse(responseCode = "500", description = "Error inesperado del sistema, comuniquese con el proveedor")
+    })
     @GetMapping("/list")
     public List<Project> getProjects(){
         return this.projectServices.getListaProject();

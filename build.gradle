@@ -42,8 +42,8 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
 	//SWAGGER
-	implementation 'io.springfox:springfox-swagger2:3.0.0'
-	implementation 'io.springfox:springfox-swagger-ui:3.0.0'
+	//implementation 'io.springfox:springfox-swagger2:3.0.0'
+	//implementation 'io.springfox:springfox-swagger-ui:3.0.0'
 	implementation 'javax.servlet:javax.servlet-api:4.0.1'
 	//implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.0.2'
 	// https://mvnrepository.com/artifact/io.springfox/springfox-boot-starter
@@ -55,12 +55,13 @@ dependencies {
 
 	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.2.0' //mariany
 	// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-validation
-	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-validation', version: '3.0.5'
+	 implementation group: 'org.springframework.boot', name: 'spring-boot-starter-validation', version: '3.0.5'
+	//implementation 'org.springdoc:springdoc-openapi-security:1.6.13'
 
 	// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter
 	//implementation group: 'org.springframework.boot', name: 'spring-boot-starter', version: '3.0.5'
 
-	implementation 'io.springfox:springfox-boot-starter:3.0.0'
+	//implementation 'io.springfox:springfox-boot-starter:3.0.0'
 
 	//SEGURIDAD
 	implementation 'org.springframework.boot:spring-boot-starter-web'

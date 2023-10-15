@@ -3,6 +3,8 @@ package com.example.kanban.controllers;
 import com.example.kanban.entitys.Task;
 import com.example.kanban.entitys.TaskStatus;
 import com.example.kanban.services.TaskServices;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.http.HttpStatus;
@@ -14,6 +16,8 @@ import java.time.LocalDateTime;
 import java.util.*;
 @RestController()
 @RequestMapping("/v1")
+@SecurityRequirement(name = "BearerAuth")
+@Tag(name = "Task controller", description = "Los metodos para la creación de las tareas relacionadas a un projecto")
 public class TaskController {
 
     @Autowired

@@ -1,4 +1,4 @@
-package com.example.kanban.controllers;
+/*package com.example.kanban.controllers;
 
 import com.example.kanban.entitys.credenciales.Contacto;
 import com.example.kanban.repositorys.ContactRepository;
@@ -24,4 +24,4 @@ public class ConctactoController {
         return contactRepository.findAll();
     }
 
-}
+}*/

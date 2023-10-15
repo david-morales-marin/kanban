@@ -6,6 +6,8 @@ import java.util.Map;
 import com.example.kanban.models.AuthenticationReq;
 import com.example.kanban.models.TokenInfo;
 import com.example.kanban.services.JwtUtilService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/v1/login")
+@Tag(name = "Usuario controller", description = "Metodo para la autenticacion del usuario")
 public class UsuarioController {
 
     @Autowired
