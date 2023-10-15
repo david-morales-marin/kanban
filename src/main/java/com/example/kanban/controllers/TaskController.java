@@ -3,6 +3,9 @@ package com.example.kanban.controllers;
 import com.example.kanban.entitys.Task;
 import com.example.kanban.entitys.TaskStatus;
 import com.example.kanban.services.TaskServices;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,23 +26,57 @@ public class TaskController {
     @Autowired
     private TaskServices taskServices;
 
-
+    @Operation(summary = "Obtener Tarea",
+            description = "Devuelve una Tarea que se busca por su ID.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200" , description = "Su respuesta ha sido exitosa."),
+            @ApiResponse(responseCode = "400", description = "Bad Request, Algo ingresaste mal. Verifica la información."),
+            @ApiResponse(responseCode = "301", description = "Credenciales erroneas o permisos no otorgados."),
+            @ApiResponse(responseCode = "403", description = "Credenciales insuficientes para visualizar la lista de los projectos."),
+            @ApiResponse(responseCode = "500", description = "Error inesperado del sistema, comuniquese con el proveedor")
+    })
     @GetMapping("/{id}")
     public Optional<Task> getTaskById(@PathVariable("id") UUID id){
         return this.taskServices.getTaskById(id);
     }
 
+    @Operation(summary = "Obtener todos las tareas",
+            description = "Devuelve una lista de todas las tareas creadas.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200" , description = "Su respuesta ha sido exitosa."),
+            @ApiResponse(responseCode = "400", description = "Bad Request, Algo ingresaste mal. Verifica la información."),
+            @ApiResponse(responseCode = "301", description = "Credenciales erroneas o permisos no otorgados."),
+            @ApiResponse(responseCode = "403", description = "Credenciales insuficientes para visualizar la lista de los projectos."),
+            @ApiResponse(responseCode = "500", description = "Error inesperado del sistema, comuniquese con el proveedor")
+    })
     @GetMapping("/listaTask")
     public List<Task> getAllTask(){
         return this.taskServices.getAllTask();
     }
 
+    @Operation(summary = "Elimina tarea",
+            description = "Elimina una tarea por su ID.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200" , description = "La tarea ha sido eliminada correctamente."),
+            @ApiResponse(responseCode = "400", description = "Bad Request, Algo ingresaste mal. Verifica la información."),
+            @ApiResponse(responseCode = "301", description = "Credenciales erroneas o permisos no otorgados."),
+            @ApiResponse(responseCode = "403", description = "Credenciales insuficientes para visualizar la lista de los projectos."),
+            @ApiResponse(responseCode = "500", description = "Error inesperado del sistema, comuniquese con el proveedor")
+    })
     @DeleteMapping("/{id}")
     public void deleteTask(@PathVariable("id") UUID id){
         this.taskServices.deleteTaskById(id);
     }
 
-    //GET /v1/projects/{id}/due-task
+    @Operation(summary = "Obtener todas las tareas por project",
+            description = "Devuelve una lista de todas las tareas que hay en un projecto.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200" , description = "Su respuesta ha sido exitosa."),
+            @ApiResponse(responseCode = "400", description = "Bad Request, Algo ingresaste mal. Verifica la información."),
+            @ApiResponse(responseCode = "301", description = "Credenciales erroneas o permisos no otorgados."),
+            @ApiResponse(responseCode = "403", description = "Credenciales insuficientes para visualizar la lista de los projectos."),
+            @ApiResponse(responseCode = "500", description = "Error inesperado del sistema, comuniquese con el proveedor")
+    })
     @GetMapping("/projects/{project_id}/due-task")
     public ResponseEntity<List<Task>> getAllTasksexpired(@PathVariable UUID project_id) throws ChangeSetPersister.NotFoundException {
 
@@ -60,7 +97,15 @@ public class TaskController {
         }
     }
 
-
+    @Operation(summary = "Creacion Tarea",
+            description = "Crea un tarea que tiene que estar relacionada a un projecto.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200" , description = "Su tarea ha sido creada existosamente."),
+            @ApiResponse(responseCode = "400", description = "Bad Request, Algo ingresaste mal. Verifica la información."),
+            @ApiResponse(responseCode = "301", description = "Credenciales erroneas o permisos no otorgados."),
+            @ApiResponse(responseCode = "403", description = "Credenciales insuficientes para visualizar la lista de los projectos."),
+            @ApiResponse(responseCode = "500", description = "Error inesperado del sistema, comuniquese con el proveedor")
+    })
     @PostMapping("/projects/{project_id}/tasks")
     public ResponseEntity<Task> createTask(@PathVariable UUID project_id, @RequestBody Task task) throws
             ChangeSetPersister.NotFoundException {
@@ -68,11 +113,6 @@ public class TaskController {
              if(task.getName() == null || task.getName().isEmpty() ||
                task.getTaskType() == null ||
                task.getDescription() == null || task.getDescription().isEmpty()){
-
-            /* puedo mejorar esto, creando una clase donde tenga el manejo de excepciones
-            y mande un "mensaje" que diga el porque no esta creando nada
-            asi como esta, no revienta pero sale en blanco la respuesta
-            mirar las clases del profe juan y lugel sobre manejo de excepciones */
 
             return  ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
         }else{
@@ -83,6 +123,15 @@ public class TaskController {
          }
     }
 
+    @Operation(summary = "Actualizar estado",
+            description = "Actualiza el estado de una tarea, siguiendo el flujo de actualización de los estados.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200" , description = "Estado actualizado correctamente."),
+            @ApiResponse(responseCode = "400", description = "Bad Request, Algo ingresaste mal. Verifica la información."),
+            @ApiResponse(responseCode = "301", description = "Credenciales erroneas o permisos no otorgados."),
+            @ApiResponse(responseCode = "403", description = "Credenciales insuficientes para visualizar la lista de los projectos."),
+            @ApiResponse(responseCode = "500", description = "Error inesperado del sistema, comuniquese con el proveedor")
+    })
     @PatchMapping("/{id}")
     public ResponseEntity<?> updateTaskStatus(
             @PathVariable UUID id,

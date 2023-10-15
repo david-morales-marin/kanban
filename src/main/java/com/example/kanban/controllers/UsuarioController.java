@@ -6,6 +6,9 @@ import java.util.Map;
 import com.example.kanban.models.AuthenticationReq;
 import com.example.kanban.models.TokenInfo;
 import com.example.kanban.services.JwtUtilService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.slf4j.Logger;
@@ -34,6 +37,15 @@ public class UsuarioController {
     private JwtUtilService jwtUtilService;
     private static final Logger logger = LoggerFactory.getLogger(UsuarioController.class);
 
+    @Operation(summary = "Login",
+            description = "Creacion del login para la generacion del token.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200" , description = "Su respuesta ha sido exitosa."),
+            @ApiResponse(responseCode = "400", description = "Bad Request, Algo ingresaste mal. Verifica la información."),
+            @ApiResponse(responseCode = "301", description = "Credenciales erroneas o permisos no otorgados."),
+            @ApiResponse(responseCode = "403", description = "Credenciales insuficientes para visualizar la lista de los projectos."),
+            @ApiResponse(responseCode = "500", description = "Error inesperado del sistema, comuniquese con el proveedor")
+    })
     @PostMapping("/authenticate")
     public ResponseEntity<TokenInfo> authenticate(@RequestBody AuthenticationReq authenticationReq) {
         logger.info("Autenticando al usuario {}", authenticationReq.getUsuario());
