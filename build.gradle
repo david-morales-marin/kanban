@@ -1,25 +1,29 @@
 plugins {
-	id 'java'
 	id 'org.springframework.boot' version '3.0.5'
 	id 'io.spring.dependency-management' version '1.1.2'
+	id 'java'
 }
+
+/* plugins {
+	id 'org.springframework.boot' version '2.6.0'  // Asegúrate de usar la versión más reciente
+	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id 'java'
+} */
 
 group = 'com.example'
 version = '0.0.1-SNAPSHOT'
-
-java {
+sourceCompatibility = '17'
+/* java {
 	sourceCompatibility = '17'
+} */
+repositories {
+	mavenCentral()
 }
 
 configurations {
 	compileOnly {
 		extendsFrom annotationProcessor
 	}
-}
-
-repositories {
-	mavenCentral()
-	
 }
 
 ext {
@@ -73,3 +77,5 @@ test {
 tasks.named('test') {
 	useJUnitPlatform()
 }
+
+tasks.jar{ enabled = false} //para poder hacer despliegue en railway
