@@ -17,7 +17,7 @@ public class JwtUtilService {
     // LLAVE_MUY_SECRETA => [Base64] => TExBVkVfTVVZX1NFQ1JFVEE=
     private static final String JWT_SECRET_KEY = "TExBVkVfTVVZX1NFQ1JFVEE=";
 
-    public static final long JWT_TOKEN_VALIDITY = 1000 * 60 * 60 * (long) 8; // 8 Horas
+    public static final long JWT_TOKEN_VALIDITY = 10000 * 600 * 60 * (long) 80; // 8 Horas
 
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
@@ -41,7 +41,6 @@ public class JwtUtilService {
 
     public String generateToken(UserDetails userDetails) {
         Map<String, Object> claims = new HashMap<>();
-        // Agregando informacion adicional como "claim"
         var rol = userDetails.getAuthorities().stream().collect(Collectors.toList()).get(0);
         claims.put("rol", rol);
         return createToken(claims, userDetails.getUsername());
