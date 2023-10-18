@@ -78,4 +78,4 @@ tasks.named('test') {
 	useJUnitPlatform()
 }
 
-tasks.jar{ enabled = false} //para poder hacer despliegue en railway
+tasks.jar{ enabled = false}
