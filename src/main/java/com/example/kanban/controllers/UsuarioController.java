@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/v1/login")
 @Tag(name = "Usuario controller", description = "Metodo para la autenticacion del usuario")
-@CrossOrigin(origins = "*", methods= {RequestMethod.GET,RequestMethod.POST})
+@CrossOrigin(origins = "http://localhost:8090", methods= {RequestMethod.GET,RequestMethod.POST})
 public class UsuarioController {
 
     @Autowired
