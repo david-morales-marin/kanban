@@ -9,6 +9,7 @@ Sistema Kanban basado en la web para la gestión de proyectos. El sistema debe p
 - Spring boot 3.0.5
 - JPA, H2
 - Gradle 8.2.1
+- Swagger 3
 
 ## Diagrama de clases
 ![Imagen tablero kanban](/doc/pry.png)
