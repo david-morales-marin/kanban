@@ -25,7 +25,7 @@ public class WebSecurityConfig {
     @Bean
     public SecurityFilterChain web(HttpSecurity http) throws Exception {
         http
-                .csrf().disable()
+               // .csrf().disable()
                 .authorizeHttpRequests((authorize) -> authorize
                         .requestMatchers("/v1/login/authenticate", "/swagger-ui/**",
                                 "/v3/api-docs/**", "/swagger-resources/**").permitAll()

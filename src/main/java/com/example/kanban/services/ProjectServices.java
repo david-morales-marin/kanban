@@ -9,7 +9,6 @@ import com.example.kanban.repositorys.ProjectRepository;
 import com.example.kanban.repositorys.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -50,7 +49,6 @@ public class ProjectServices {
 
     public void deleteProject(UUID id){
         this.projectRepository.deleteById(id);
-      // return "Se elimino el projecto correctamente";
     }
 
     public Project putProject(Project project, UUID id){
@@ -66,7 +64,7 @@ public class ProjectServices {
         return this.projectRepository.findById(id).orElse(null);
     }
 
-    public ProjectBoardResponse getTaskByProject(UUID id){
+  /*  public ProjectBoardResponse getTaskByProject(UUID id){
 
         Project project = this.projectRepository.findById(id).orElse(null);
 
@@ -93,6 +91,7 @@ public class ProjectServices {
                         taskDONE.add(task);
                     }
                 });
+
 
                 BoardResponse boardTODO = new BoardResponse();
                 boardTODO.setStatus(TaskStatus.TODO.name());
@@ -122,7 +121,63 @@ public class ProjectServices {
         }
 
         return  null;
+    } */
+
+    //mejora de separar el metodo en metodos mas pequeños
+    public ProjectBoardResponse getTaskByProject(UUID id) {
+        
+        Project project = this.projectRepository.findById(id).orElse(null);
+
+        if (project != null) {
+            ProjectBoardResponse result = new ProjectBoardResponse();
+            result.setId(project.getId());
+            result.setName(project.getName());
+
+            List<Task> tasks = this.taskRepository.findByProjectId(id);
+
+            if (tasks != null) {
+                List<BoardResponse> resultBoard = listBoardResponses(tasks);
+                result.setBoard(resultBoard);
+            }
+
+            return result;
+        }
+
+        return null;
     }
 
+    private List<BoardResponse> listBoardResponses(List<Task> tasks) {
+        List<BoardResponse> result = new ArrayList<>();
+        List<Task> taskTODO = new ArrayList<>();
+        List<Task> taskINPROGRESS = new ArrayList<>();
+        List<Task> taskBLOCKED = new ArrayList<>();
+        List<Task> taskDONE = new ArrayList<>();
+
+        tasks.stream().forEach(task -> {
+            if (task.getTaskStatus().equals(TaskStatus.TODO)) {
+                taskTODO.add(task);
+            } else if (task.getTaskStatus().equals(TaskStatus.INPROGRESS)) {
+                taskINPROGRESS.add(task);
+            } else if (task.getTaskStatus().equals(TaskStatus.BLOCKED)) {
+                taskBLOCKED.add(task);
+            } else if (task.getTaskStatus().equals(TaskStatus.DONE)) {
+                taskDONE.add(task);
+            }
+        });
+
+        result.add(statusBoard(TaskStatus.TODO.name(), taskTODO));
+        result.add(statusBoard(TaskStatus.INPROGRESS.name(), taskINPROGRESS));
+        result.add(statusBoard(TaskStatus.BLOCKED.name(), taskBLOCKED));
+        result.add(statusBoard(TaskStatus.DONE.name(), taskDONE));
+
+        return result;
+    }
+
+    private BoardResponse statusBoard(String status, List<Task> tasks) {
+        BoardResponse boardResponse = new BoardResponse();
+        boardResponse.setStatus(status);
+        boardResponse.setTasks(tasks);
+        return boardResponse;
+    }
 
 }
