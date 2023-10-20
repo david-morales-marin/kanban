@@ -25,16 +25,14 @@ public class WebSecurityConfig {
     private JwtRequestFilter jwtRequestFilter;
 
     /*
-
-    @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
             .requiresChannel()
             .requestMatchers(r -> r.getHeader("X-Forwarded-Proto") != null)
             .requiresSecure();
     }
-}
-*/
+}*/
+
   /*  @Bean
     public OpenAPI openAPI() {
         return new OpenAPI()

@@ -1,4 +1,4 @@
-/*package com.example.kanban.config;
+package com.example.kanban.config;
 
 
 import io.swagger.v3.oas.annotations.security.SecurityScheme;
@@ -16,4 +16,4 @@ public class OpenAPIConfiguration {
                 .addServersItem(new Server().url("/"));
     }
 
-}*/
+}
