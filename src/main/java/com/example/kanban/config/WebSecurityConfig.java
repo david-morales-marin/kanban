@@ -1,6 +1,8 @@
 package com.example.kanban.config;
 
 import com.example.kanban.filter.JwtRequestFilter;
+import io.swagger.v3.oas.models.OpenAPI;
+import io.swagger.v3.oas.models.servers.Server;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,6 +23,23 @@ public class WebSecurityConfig {
 
     @Autowired
     private JwtRequestFilter jwtRequestFilter;
+
+    /*
+
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http
+            .requiresChannel()
+            .requestMatchers(r -> r.getHeader("X-Forwarded-Proto") != null)
+            .requiresSecure();
+    }
+}
+*/
+    @Bean
+    public OpenAPI openAPI() {
+        return new OpenAPI()
+                .addServersItem(new Server().url("/"));
+    }
 
     @Bean
     public SecurityFilterChain web(HttpSecurity http) throws Exception {
