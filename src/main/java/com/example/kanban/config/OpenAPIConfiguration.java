@@ -1,7 +1,6 @@
 package com.example.kanban.config;
 
-import io.swagger.annotations.Info;
-import io.swagger.annotations.License;
+
 import io.swagger.v3.oas.annotations.security.SecurityScheme;
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;
