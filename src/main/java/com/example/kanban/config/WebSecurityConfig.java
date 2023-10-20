@@ -35,7 +35,7 @@ public class WebSecurityConfig {
     }
 }
 */
-   /* @Bean
+  /*  @Bean
     public OpenAPI openAPI() {
         return new OpenAPI()
                 .addServersItem(new Server().url("/"));
