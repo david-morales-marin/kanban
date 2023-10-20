@@ -46,7 +46,7 @@ public class WebSecurityConfig {
                 .authorizeHttpRequests((authorize) -> authorize
                         .requestMatchers("/v1/login/authenticate", "/swagger-ui/**",
                                 "/v3/api-docs/**", "/swagger-resources/**").permitAll()
-                        .requestMatchers("kanban-production-d917.up.railway.app/**").permitAll()
+                        .requestMatchers("/kanban-production-d917.up.railway.app/**").permitAll()
                         .requestMatchers("/**").hasRole("ADMIN")
                         .requestMatchers("/v1/listaTask").hasRole("USER")
                         .requestMatchers(HttpMethod.POST).hasRole("ADMIN")
