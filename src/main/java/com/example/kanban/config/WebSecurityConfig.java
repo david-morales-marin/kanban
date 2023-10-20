@@ -24,35 +24,20 @@ public class WebSecurityConfig {
     @Autowired
     private JwtRequestFilter jwtRequestFilter;
 
-    /*
-    protected void configure(HttpSecurity http) throws Exception {
-        http
-            .requiresChannel()
-            .requestMatchers(r -> r.getHeader("X-Forwarded-Proto") != null)
-            .requiresSecure();
-    }
-}*/
-
-  /*  @Bean
-    public OpenAPI openAPI() {
-        return new OpenAPI()
-                .addServersItem(new Server().url("/"));
-    }*/
-
     @Bean
     public SecurityFilterChain web(HttpSecurity http) throws Exception {
         http
                 .csrf().disable()
                 .authorizeHttpRequests((authorize) -> authorize
-                        .requestMatchers("/https://kanban-production-d917.up.railway.app/**").permitAll()
-                        .requestMatchers("/v1/login/authenticate", "/swagger-ui/**",
+                        .requestMatchers("/v1/login/authenticate1", "/swagger-ui/**",
                                 "/v3/api-docs/**", "/swagger-resources/**").permitAll()
+                        .requestMatchers("/https://kanban-production-d917.up.railway.app/**").permitAll()
                         .requestMatchers("/**").hasRole("ADMIN")
                         .requestMatchers("/v1/listaTask").hasRole("USER")
                         .requestMatchers(HttpMethod.POST).hasRole("ADMIN")
                         .anyRequest().authenticated()
                 )
-                .cors(withDefaults())
+               // .cors(withDefaults())
                 .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class)
                 .sessionManagement((session) -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
