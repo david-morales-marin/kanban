@@ -47,7 +47,7 @@ public class UsuarioController {
             @ApiResponse(responseCode = "403", description = "Credenciales insuficientes para visualizar la lista de los projectos."),
             @ApiResponse(responseCode = "500", description = "Error inesperado del sistema, comuniquese con el proveedor")
     })
-    @PostMapping("/authenticate")
+    @PostMapping("/authenticateeeeee")
     @CrossOrigin(origins = "http://localhost:8090")
     public ResponseEntity<TokenInfo> authenticate(@RequestBody AuthenticationReq authenticationReq) {
         logger.info("Autenticando al usuario {}", authenticationReq.getUsuario());
