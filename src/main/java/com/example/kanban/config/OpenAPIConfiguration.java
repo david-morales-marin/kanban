@@ -1,4 +1,4 @@
-package com.example.kanban.config;
+/*package com.example.kanban.config;
 
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.servers.Server;
@@ -13,4 +13,4 @@ public class OpenAPIConfiguration {
         return new OpenAPI()
                 .addServersItem(new Server().url("/"));
     }
-}
+}*/
