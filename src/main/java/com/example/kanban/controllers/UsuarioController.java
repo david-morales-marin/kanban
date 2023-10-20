@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/v1/login")
 @Tag(name = "Usuario controller", description = "Metodo para la autenticacion del usuario")
-@CrossOrigin(origins = "*", methods= {RequestMethod.GET,RequestMethod.POST})
+//@CrossOrigin(origins = "*", methods= {RequestMethod.GET,RequestMethod.POST})
 public class UsuarioController {
 
     @Autowired
@@ -47,8 +47,7 @@ public class UsuarioController {
             @ApiResponse(responseCode = "403", description = "Credenciales insuficientes para visualizar la lista de los projectos."),
             @ApiResponse(responseCode = "500", description = "Error inesperado del sistema, comuniquese con el proveedor")
     })
-    @PostMapping("/authenticateeeeee")
-    //@CrossOrigin(origins = "http://localhost:8090")
+    @PostMapping("/authenticate1")
     public ResponseEntity<TokenInfo> authenticate(@RequestBody AuthenticationReq authenticationReq) {
         logger.info("Autenticando al usuario {}", authenticationReq.getUsuario());
 
