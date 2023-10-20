@@ -35,11 +35,11 @@ public class WebSecurityConfig {
     }
 }
 */
-    @Bean
+   /* @Bean
     public OpenAPI openAPI() {
         return new OpenAPI()
                 .addServersItem(new Server().url("/"));
-    }
+    }*/
 
     @Bean
     public SecurityFilterChain web(HttpSecurity http) throws Exception {
