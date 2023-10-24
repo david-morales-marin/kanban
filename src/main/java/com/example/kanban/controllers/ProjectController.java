@@ -46,7 +46,7 @@ public class ProjectController {
             @ApiResponse(responseCode = "403", description = "Credenciales insuficientes para visualizar la lista de los projectos."),
             @ApiResponse(responseCode = "500", description = "Error inesperado del sistema, comuniquese con el proveedor")
     })
-    @GetMapping("/list")
+    @GetMapping("/")
     public List<Project> getProjects(){
         return this.projectServices.getListaProject();
     }

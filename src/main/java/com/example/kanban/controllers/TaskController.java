@@ -49,7 +49,7 @@ public class TaskController {
             @ApiResponse(responseCode = "403", description = "Credenciales insuficientes para visualizar la lista de los projectos."),
             @ApiResponse(responseCode = "500", description = "Error inesperado del sistema, comuniquese con el proveedor")
     })
-    @GetMapping("/listaTask")
+    @GetMapping("/")
     public List<Task> getAllTask(){
         return this.taskServices.getAllTask();
     }
