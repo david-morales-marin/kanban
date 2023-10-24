@@ -26,7 +26,7 @@ public class TaskController {
     @Autowired
     private TaskServices taskServices;
 
-    @Operation(summary = "Obtener Tarea",
+    @Operation(summary = "Obtener Tarea" ,
             description = "Devuelve una Tarea que se busca por su ID.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200" , description = "Su respuesta ha sido exitosa."),
