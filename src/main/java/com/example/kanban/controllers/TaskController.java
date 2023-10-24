@@ -18,7 +18,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.*;
 @RestController()
-@RequestMapping("/v1")
+@RequestMapping("/v1/task")
 @SecurityRequirement(name = "BearerAuth")
 @Tag(name = "Task controller", description = "Los metodos para la creación de las tareas relacionadas a un projecto")
 public class TaskController {

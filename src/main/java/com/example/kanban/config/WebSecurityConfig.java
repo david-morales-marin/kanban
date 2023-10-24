@@ -37,7 +37,7 @@ public class WebSecurityConfig {
                         .requestMatchers(HttpMethod.POST).hasRole("ADMIN")
                         .anyRequest().authenticated()
                 )
-               // .cors(withDefaults())
+                .cors(withDefaults())
                 .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class)
                 .sessionManagement((session) -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
